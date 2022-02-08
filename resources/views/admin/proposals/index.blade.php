@@ -5,10 +5,10 @@
 @endsection
 @section('content')
     <div class="container">
-        
+
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{ url('admin/proposal/create') }}" class="btn btn-primary" title="Add New department">  
+                        <a href="{{ url('admin/proposal/create') }}" class="btn btn-primary" title="Add New department">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New Proposal
                         </a>
                         <br/>
@@ -43,7 +43,7 @@
                                         <td>{{ $item->due_date }}</td>
                                          <td>sent</td>
                                         {{-- <td style=" color:@php if($item->status=='sent'){ echo 'yellow'; }elseif($item->status=='acceptd'){echo 'green';}else{echo 'red';}@endphp;">{{ $item->status }}</td> --}}
-                                        
+
                                         <td>
                                             <a href="{{ url('admin/proposal/' . $item->id) }}" title="View Student"><button class="btn btn-info btn-sm"><i class="far fa-eye"></i></button></a>
                                             <a href="{{ url('admin/proposal/' . $item->id . '/edit') }}" title="Edit Student"><button class="btn btn-primary btn-sm"> <i class="fas fa-edit"></i></button></a>
@@ -62,3 +62,4 @@
         </div>
     </div>
 @endsection
+

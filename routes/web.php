@@ -8,6 +8,7 @@ use App\Http\Controllers\departmentController;
 use App\Http\Controllers\proposalController;
 use App\Http\Controllers\ProposalItemController;
 use App\Http\Controllers\ProposalUserController;
+use App\Http\Controllers\paymentreceivedController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Routing\RouteGroup;
 
@@ -28,9 +29,10 @@ Route::Group([ 'prefix' => 'admin','middleware' => ['ChkAdmin']], function () {
     Route::resource('/proposalitem', ProposalItemController::class);
     Route::resource('/department', departmentController::class);
     Route::resource('/proposal', proposalController::class);
+    Route::resource('/paymentreceived', paymentreceivedController::class);
 
     Route::get('/download/{id}', [ProposalController::class,'printToPdf'])->name('download');
-    
+
     Route::get('/getPrice/{id}', [proposalController::class,'getPrice'])->name('getPrice');
     Route::get('/customer', [IsAdmin::class, 'customer'])->name('customer');
     Route::get('/', [IsAdmin::class, 'index'])->name('dashboard');

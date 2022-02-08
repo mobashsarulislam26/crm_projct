@@ -5,7 +5,7 @@
     {{-- {{dd($ProposalItem)}} --}}
         <a href="{{ url('admin/download/') }}/{{$contacts->id}}">Download PDF File</a>
 
-        
+
 
       <div class="row">
         <div class="col-md-3">
@@ -64,11 +64,11 @@
                     </thead>
                     <tbody>
                         @php
-                        $i=0;  
+                        $i=0;
                         $sub =0;
                         $tax=0;
                         $totalSum =0;
-                        
+
                         @endphp
 
                          @foreach ($ProposalItem as $ProposalIt)
@@ -81,18 +81,19 @@
 
                              $totalSum += ($ProposalIt->price*$ProposalIt->qty) + ($ProposalIt->price*$ProposalIt->qty) * $taxFix/100;
                          @endphp
-                         
-                        
+
+
                     <tr>
                         <td>{{++$i;}}</td>
-                        <td>{{$ProposalIt->proposal->customers->company_name}}</td>
+                        {{-- <td>{{$ProposalIt->proposal->customers->company_name}}</td> --}}
                         <td>{{$ProposalIt->Item->name}}</td>
+                        <td>{{$ProposalIt->Item->unit->unit_name}}</td>
                         <td>{{$ProposalIt->Item->tax->rules ?? '0'}}</td>
                         <td>{{$ProposalIt->price}}</td>
                         <td>{{$ProposalIt->qty}}</td>
                         <td>{{$ProposalIt->price*$ProposalIt->qty}}</td>
                     </tr>
-                        
+
                     @endforeach
                     <tr>
                         <td colspan="6" style="text-align:right">Sub Total</td>
@@ -107,8 +108,8 @@
                         <td>{{$totalSum}}</td>
                     </tr>
 
-                    
-                       
+
+
                     </tbody>
                 </table>
 
@@ -121,8 +122,8 @@
                     <i style="margin-right: 5px" class="fas fa-book fa-2x "></i>
                     <h4>Summery</h4><br></div>
                     <div>
-                          
-               
+
+
                     </div>
             </div>
         </div>

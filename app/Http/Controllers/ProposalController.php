@@ -20,12 +20,12 @@ class ProposalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
+    {
         $contacts = customers::get();
          $contacts = proposal::all();
         //  dd($contacts->proposals);
         return view ('admin.proposals.index',compact('contacts'));
-                                            
+
     }
 
     /**
@@ -34,7 +34,7 @@ class ProposalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {    
+    {
         $contacts = customers::get();
          $data = Item::get();
          $Item = User::get();
@@ -42,11 +42,11 @@ class ProposalController extends Controller
          return view('admin.proposals.create',compact('contacts','data','Item','dat'));
     }
 
-    
+
     public function store(Request $request)
     {
         // dd($request);
-        
+
         $request->validate([
             'customer_id' => 'required',
             'subject' => 'required',
@@ -61,7 +61,7 @@ class ProposalController extends Controller
             $proposal['due_date'] = $request->due_date;
             $proposal['status'] = 'sent';
             $pro = proposal::create($proposal);
-                
+
             $proposal_item = new ProposalItem;
 
                 foreach ($request->item_id as $k => $id){
@@ -82,7 +82,7 @@ class ProposalController extends Controller
         // $input = $request->all();
         // proposal::create($input);
         // dd($input);
-        return redirect('admin/proposal')->with('success', 'proposals created successfully'); 
+        return redirect('admin/proposal')->with('success', 'Proposals Created Successfully');
     }
 
     /**
@@ -92,12 +92,12 @@ class ProposalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
-        
+    {
+
         $contacts = proposal::find($id);
         $ProposalItem = ProposalItem::where('proposal_id',$id)->get();
         return view('admin.proposals.show',compact('contacts','ProposalItem'));
-    
+
     }
     public function printToPdf($id)
     {
@@ -125,7 +125,7 @@ class ProposalController extends Controller
         $customers= Customers::get();
         $ProposalItem = ProposalItem::where('proposal_id',$id)->get();
         $edit_user = ProposalUser::where('proposal_id',$id)->get();
-        
+
         // dd($ProposalItem);
         // exit;
         return view('admin.proposals.edit',compact('contacts','customers','item','user','ProposalItem','edit_user'));
@@ -145,12 +145,12 @@ class ProposalController extends Controller
             'subject' => 'required',
             'date' => 'required',
             'due_date' => 'required'
-       
+
     ]);
     // dd($request);
         ProposalItem::where('proposal_id', $id)->delete();
         ProposalUser::where('proposal_id', $id)->delete();
-        
+
 
         $proposal['customer_id'] = $request->customer_id;
         $proposal['subject'] = $request->subject;
@@ -172,11 +172,11 @@ class ProposalController extends Controller
             $item_user['user_id'] = $est_user_id;
             ProposalUser::create($item_user);
         }
-         
-        return redirect('admin/proposal')->with('success', 'proposals updated successfully');  
+
+        return redirect('admin/proposal')->with('success', 'Proposals Updated Successfully');
      }
 
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -187,7 +187,7 @@ class ProposalController extends Controller
     {
         $data = proposal::find($id);
         $data->delete();
-        return redirect('admin/proposal')->with('success', ' proposals deleted successfully'); 
+        return redirect('admin/proposal')->with('success', ' Proposals Deleted Successfully');
     }
 
     public function getPrice($id)
@@ -204,5 +204,5 @@ class ProposalController extends Controller
      $data['tax']=$item->tax->rules;
      $data['qty']=1;
     return json_encode($data);
-   }   
+   }
 }
